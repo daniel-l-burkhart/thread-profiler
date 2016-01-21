@@ -55,18 +55,19 @@ public class Application {
 	}
 
 	private static void printInitialHeader() {
-		System.out.println("---");
 		System.out.println("--- Current Threads ---");
-		System.out.println("No. / Name/ CPU Time / User Time/ User/CPU // Thread State");
+		System.out.printf("%s | %s | %s | %s | %s | %s", "No.", "Name", "CPU Time", "User Time", "User/CPU",
+				"Thread State");
+		System.out.println("\n------------------------");
 	}
 
 	private static void formatAndPrintOutThreadData(ThreadMXBean bean, long id) {
 		ThreadInfo info = bean.getThreadInfo(id);
 
-		System.out.printf("%d| %s| %d| %d| %d %s", info.getThreadId(), info.getThreadName(), bean.getThreadCpuTime(id),
+		System.out.printf("%d| %s| %d| %d| %d %s\n", info.getThreadId(), info.getThreadName(), bean.getThreadCpuTime(id),
 				bean.getThreadUserTime(id), bean.getThreadCpuTime(id) / bean.getThreadUserTime(id),
 				info.getThreadState());
-		System.out.println("");
+		
 	}
 
 }
