@@ -27,8 +27,9 @@ public class Application {
 	 */
 	public static void main(String[] args) {
 
-		startThreads();
 		System.err.close();
+		startThreads();
+
 		ThreadMXBean bean = ManagementFactory.getThreadMXBean();
 
 		while (true) {
@@ -55,10 +56,10 @@ public class Application {
 	}
 
 	private static void printInitialHeader() {
-		System.out.println("--- Current Threads ---");
-		System.out.printf("%5s | %10s| %15d| %15d| %5d| %10s", "No.", "Name", "CPU Time", "User Time", "User/CPU",
-				"Thread State");
-		System.out.println("\n------------------------");
+		System.out.println("\n--- Current Threads ---");
+		System.out.println(String.format("%5s | %20s| %15s| %15s| %10s| %10s", "No.", "Name", "CPU Time", "User Time",
+				"User/CPU", "Thread State"));
+		System.out.println("-------------------------------------------------------------------------------------");
 	}
 
 	private static void formatAndPrintOutThreadData(ThreadMXBean bean, long id) {
@@ -67,7 +68,7 @@ public class Application {
 
 		long result = (long) bean.getThreadUserTime(id) / bean.getThreadCpuTime(id);
 
-		System.out.println(String.format("%5s | %20s| %15d| %15d| %5d| %10s", info.getThreadId(), info.getThreadName(),
+		System.out.println(String.format("%5s | %20s| %15d| %15d| %10d| %10s", info.getThreadId(), info.getThreadName(),
 				bean.getThreadCpuTime(id), bean.getThreadUserTime(id), result, info.getThreadState()));
 
 	}
